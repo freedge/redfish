@@ -1,8 +1,13 @@
 Redfish
 =======
 
-An Ansible collection to set a few parameters in iLO that could not be set using HPE Oneview:
+An Ansible collection to set a few parameters in iLO4 that could not be set using HPE Oneview:
 - enabling IPMI service
+
+# Usage
+
+Check examples/ilo.yml
+
 
 # Installation
 
