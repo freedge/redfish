@@ -8,7 +8,7 @@ description: set some iLO parameters not managed by OneView
 license:
   - GPL-2.0-or-later
 tags:
-  - iLO4
+  - ilo
   - redfish
 dependencies: {}
 repository: https://github.com/freedge/redfish
