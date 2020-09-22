@@ -1,0 +1,21 @@
+namespace: freedge
+name: redfish
+version: 0.0.1
+readme: README.md
+authors:
+  - Francois Rigault <rigault.francois@gmail.com>
+description: set some iLO parameters not managed by OneView
+license:
+  - GPL-2.0-or-later
+tags:
+  - iLO
+  - redfish
+dependencies: {}
+repository: https://github.com/freedge/redfish
+documentation: https://github.com/freedge/redfish
+issues: https://github.com/freedge/redfish/issues
+build_ignore:
+  - myenv
+  - .gitignore
+  - examples
+ 

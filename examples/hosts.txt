@@ -1,0 +1,2 @@
+[ilo]
+server1 ilo_ip=127.0.0.1

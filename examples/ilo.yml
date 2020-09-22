@@ -1,0 +1,18 @@
+- name: test my new module
+  hosts: ilo
+  connection: local
+  gather_facts: no
+  collections:
+    - freedge.redfish
+  vars:
+    credentials:
+      username: leuser
+      password: lepass
+      base_url: https://{{ ilo_ip }}
+  tasks:
+    - name: configure ilo
+      delegate_to: localhost
+      ipmi:
+        credentials: "{{credentials}}"
+        enabled: True
+
