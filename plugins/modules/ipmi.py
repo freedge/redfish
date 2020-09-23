@@ -30,18 +30,22 @@ import redfish
 
 
 def main():
-    argument_spec = dict(credentials=dict(type="dict"), port=dict(type="int", default=623), enabled=dict(type="bool"))
+    argument_spec = dict(
+        credentials=dict(type="dict", options=dict(username=dict(type="str"), base_url=dict(type="str"), password=dict(type="str", no_log=True))),
+        port=dict(type="int", default=623),
+        enabled=dict(type="bool")
+    )
     module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)
 
     REDFISHOBJ = redfish.RedfishClient(**module.params['credentials'])
+    REDFISHOBJ.login()
     networkservice = REDFISHOBJ.get("/rest/v1/managers/1/NetworkService")
     ipmiservice = networkservice.obj.IPMI
-    changed = ipmiservice.port != module.params['port'] or ipmiservice.ProtocolEnabled != module.params['enabled']
-    result = {'changed': changed, 'ipmiservice': ipmiservice}
+    changed = ipmiservice.Port != module.params['port'] or ipmiservice.ProtocolEnabled != module.params['enabled']
+    result = {'changed': changed}
 
     if not module.check_mode:
-        patched = REDFISHOBJ.patch("/rest/v1/managers/1/NetworkService", {"IPMI": {"Port": module.params['port'], "ProtocolEnabled": module.params['enabled']}})
-        result['patch'] = patched
+        REDFISHOBJ.patch("/rest/v1/managers/1/NetworkService", {"IPMI": {"Port": module.params['port'], "ProtocolEnabled": module.params['enabled']}})
 
     module.exit_json(**result)
 
